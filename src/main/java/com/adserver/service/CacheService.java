@@ -6,8 +6,8 @@ import java.util.Map;
 public class CacheService {
 
     private final static Map<Integer, Integer> campaignHitCountMap = new HashMap<Integer, Integer>();
-    private final static Map<Integer, Integer> campaignMaxHitCountMap = new HashMap<Integer, Integer>();
-    private final static Map<Integer, String> customerTypeMap = new HashMap<Integer, String>();
+    private static Map<Integer, Integer> campaignMaxHitCountMap;
+    private static Map<Integer, String> customerTypeMap;
 
     private CacheService() {}
 
@@ -30,5 +30,12 @@ public class CacheService {
 
     public static String getCustomerType(Integer customerId) {
         return customerTypeMap.get(customerId);
+    }
+
+    public static void populateMaps(Map<Integer, Integer> campaignMaxHitCountMap, Map<Integer, String> customerTypeMap) {
+        if (customerTypeMap == null) { // no modification once initialized
+            CacheService.campaignMaxHitCountMap = campaignMaxHitCountMap;
+            CacheService.customerTypeMap = customerTypeMap;
+        }
     }
 }

@@ -1,0 +1,6 @@
+- Would need MySQL installed.
+- Would need java installed on your machine. Any version greater than JDK 5 will work.
+- would need Tomcat installed on your machine.
+- Install a new user adserver in tomcat-users.xml.
+- Create database as adserver using CREATED DATABASE adserver
+- Run the adserver_setup.sql

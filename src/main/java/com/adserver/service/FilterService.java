@@ -2,6 +2,8 @@ package com.adserver.service;
 
 import java.util.List;
 import com.adserver.datatype.AdDBResponse;
+import com.adserver.filter.FilterCriteria;
+import com.adserver.filter.RefererFilter;
 
 public class FilterService implements FilterCriteria {
 
@@ -18,5 +20,17 @@ public class FilterService implements FilterCriteria {
     @Override
     public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses) {
         return refererCriteria.meetCriteria(dailyLimitCampaignCriteria.meetCriteria(categoryFilter.meetCriteria(adDbResponses)));
+    }
+
+    public FilterCriteria getCategoryFilter() {
+        return categoryFilter;
+    }
+
+    public FilterCriteria getDailyLimitCampaignCriteria() {
+        return dailyLimitCampaignCriteria;
+    }
+
+    public RefererFilter getRefererCriteria() {
+        return (RefererFilter) refererCriteria;
     }
 }

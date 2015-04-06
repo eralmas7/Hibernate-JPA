@@ -1,0 +1,23 @@
+- Started off with Spring MVC, Hibernate, JPA queries, Maven for the first time.
+- Would have exposed customer config api as rest rather than WS.
+- Exposed Ad service as Rest and output as json since json would jell well with javascripts.
+- Used Tomcat as the container.
+- Used basic authentication mechanism for every url access. It doesn't use per client basis authentication. For now if we need per server authentication, then it must go via tomcat-users.xml.
+- Tried using SOLID as design principles.
+- There must be script to activate/deactivate which is not handle by the code.
+- Things in cache are static and loads up only when app starts. It doesn't cater for data changes in DB behind the scene.
+- If no ads are found then it just throws an exception which would give a client non 20X http status and client may handle it appropriately.
+- If no configuration exists for customer, then it will throw an exception
+- It is assumed that image files are stored on the file system and path exist in one of the table in MySql.
+- It doesn't take care of issues arising of concurrent request.
+
+Tech stack used:
+Spring MVC
+JAX RS
+JAX WS
+Hibernate ORM + JPA
+Junit
+Core Java
+Apache tomcat
+MySql
+Mavel as build management tool.
