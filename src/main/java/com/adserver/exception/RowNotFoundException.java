@@ -8,7 +8,7 @@ public class RowNotFoundException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    public RowNotFoundException(String message) {
+    public RowNotFoundException(final String message) {
         super(message);
     }
 }

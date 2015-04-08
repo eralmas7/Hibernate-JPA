@@ -36,15 +36,16 @@ public class AdServiceControllerTest {
     public void testControllerSuccessfully() {
         List<AdDBResponse> dbResponse = new ArrayList<AdDBResponse>();
         AdDBResponse adResponse = Mockito.mock(AdDBResponse.class);
-        Mockito.when(adResponse.getLocation()).thenReturn("src/main/test/resources/tomcat.png");
+        Mockito.when(adResponse.getLocation()).thenReturn("src/test/resources/tomcat.png");
         dbResponse.add(adResponse);
         Mockito.when(adDbService.fetchAllAds("1")).thenReturn(dbResponse);
-        Mockito.when(filterService.meetCriteria(dbResponse, 2)).thenReturn(dbResponse);
+        Mockito.when(filterService.filterAds(dbResponse, 2)).thenReturn(dbResponse);
         Mockito.when(bestAdsProvider.getBestAdForClient(dbResponse, "1")).thenReturn(adResponse);
         try {
             AdMedia adMedia = adServiceController.getAdMediaForClient("1", 2, "1", httpServletResponse);
             Assert.assertNotNull(adMedia);
         } catch (Exception exception) {
+            exception.printStackTrace();
             Assert.fail("Did not expected exception");
         }
     }
@@ -53,7 +54,7 @@ public class AdServiceControllerTest {
     public void testControllerWithoutDataFromDBSuccessfully() {
         List<AdDBResponse> dbResponse = new ArrayList<AdDBResponse>();
         Mockito.when(adDbService.fetchAllAds("1")).thenReturn(dbResponse);
-        Mockito.when(filterService.meetCriteria(dbResponse, 2)).thenReturn(dbResponse);
+        Mockito.when(filterService.filterAds(dbResponse, 2)).thenReturn(dbResponse);
         try {
             adServiceController.getAdMediaForClient("1", 2, "1", httpServletResponse);
             Assert.fail("expected exception!!");
@@ -70,7 +71,7 @@ public class AdServiceControllerTest {
         dbResponse.add(adResponse);
         List<AdDBResponse> filteredDbResponse = new ArrayList<AdDBResponse>();
         Mockito.when(adDbService.fetchAllAds("1")).thenReturn(dbResponse);
-        Mockito.when(filterService.meetCriteria(dbResponse, 2)).thenReturn(filteredDbResponse);
+        Mockito.when(filterService.filterAds(dbResponse, 2)).thenReturn(filteredDbResponse);
         try {
             adServiceController.getAdMediaForClient("1", 2, "1", httpServletResponse);
             Assert.fail("expected exception!!");

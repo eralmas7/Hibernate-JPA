@@ -4,23 +4,28 @@ import java.util.List;
 import com.adserver.datatype.AdDBResponse;
 import com.adserver.filter.FilterCriteria;
 
-/**
- * Filter's out best possible ad's for users.
- */
-public class FilterService implements FilterCriteria {
+public class FilterService {
 
     private FilterCriteria categoryFilter;
     private FilterCriteria dailyLimitCampaignCriteria;
     private FilterCriteria refererCriteria;
+    private FilterCriteria nullCriteria;
 
-    public FilterService(FilterCriteria categoryFilter, FilterCriteria dailyLimitCampaignCriteria, FilterCriteria refererCriteria) {
+    public FilterService(FilterCriteria categoryFilter, FilterCriteria dailyLimitCampaignCriteria, FilterCriteria refererCriteria, FilterCriteria nullCriteria) {
         this.categoryFilter = categoryFilter;
         this.dailyLimitCampaignCriteria = dailyLimitCampaignCriteria;
         this.refererCriteria = refererCriteria;
+        this.nullCriteria = nullCriteria;
+        createFilterChain();
     }
 
-    @Override
-    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses, int referer) {
-        return refererCriteria.meetCriteria(dailyLimitCampaignCriteria.meetCriteria(categoryFilter.meetCriteria(adDbResponses, referer), referer), referer);
+    private void createFilterChain() {
+        categoryFilter.addNextFilter(nullCriteria);
+        dailyLimitCampaignCriteria.addNextFilter(categoryFilter);
+        refererCriteria.addNextFilter(dailyLimitCampaignCriteria);
+    }
+
+    public List<AdDBResponse> filterAds(List<AdDBResponse> adDbResponses, int referer) {
+        return refererCriteria.meetCriteria(adDbResponses, referer);
     }
 }

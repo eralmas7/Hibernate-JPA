@@ -146,7 +146,13 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
 		 <dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
@@ -187,6 +193,11 @@
 		<groupId>commons-logging</groupId>
 		<artifactId>commons-logging</artifactId>
 		<version>1.1.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>LATEST</version>
 	</dependency>
 </dependencies>
     <build>

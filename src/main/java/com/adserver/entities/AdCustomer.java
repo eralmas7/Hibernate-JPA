@@ -36,7 +36,7 @@ public class AdCustomer {
 
     public AdCustomer() {}
 
-    public AdCustomer(int customerId, String customerDns, String customerName, byte isCustomerActive, Date customerStartDate, Date customerEndDate, int customerType) {
+    public AdCustomer(final int customerId, final String customerDns, final String customerName, final byte isCustomerActive, final Date customerStartDate, final Date customerEndDate, final int customerType) {
         super();
         this.customerId = customerId;
         this.customerDns = customerDns;
@@ -51,7 +51,7 @@ public class AdCustomer {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(final int customerId) {
         this.customerId = customerId;
     }
 
@@ -59,7 +59,7 @@ public class AdCustomer {
         return customerDns;
     }
 
-    public void setCustomerDns(String customerDns) {
+    public void setCustomerDns(final String customerDns) {
         this.customerDns = customerDns;
     }
 
@@ -67,7 +67,7 @@ public class AdCustomer {
         return isCustomerActive;
     }
 
-    public void setIsCustomerActive(byte isCustomerActive) {
+    public void setIsCustomerActive(final byte isCustomerActive) {
         this.isCustomerActive = isCustomerActive;
     }
 
@@ -75,7 +75,7 @@ public class AdCustomer {
         return customerStartDate;
     }
 
-    public void setCustomerStartDate(Date customerStartDate) {
+    public void setCustomerStartDate(final Date customerStartDate) {
         this.customerStartDate = customerStartDate;
     }
 
@@ -83,7 +83,7 @@ public class AdCustomer {
         return customerEndDate;
     }
 
-    public void setCustomerEndDate(Date customerEndDate) {
+    public void setCustomerEndDate(final Date customerEndDate) {
         this.customerEndDate = customerEndDate;
     }
 
@@ -91,7 +91,7 @@ public class AdCustomer {
         return customerName;
     }
 
-    public void setCustomerName(String customerName) {
+    public void setCustomerName(final String customerName) {
         this.customerName = customerName;
     }
 
@@ -99,7 +99,7 @@ public class AdCustomer {
         return customerType;
     }
 
-    public void setCustomerType(int customerType) {
+    public void setCustomerType(final int customerType) {
         this.customerType = customerType;
     }
 
@@ -107,7 +107,7 @@ public class AdCustomer {
         return adDetailsList;
     }
 
-    public void setAdDetailsList(List<AdDetails> adDetailsList) {
+    public void setAdDetailsList(final List<AdDetails> adDetailsList) {
         this.adDetailsList = adDetailsList;
     }
 

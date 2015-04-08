@@ -17,6 +17,7 @@ import com.adserver.datatype.AdMedia;
 import com.adserver.exception.NoRecordFoundException;
 import com.adserver.service.AdDbService;
 import com.adserver.service.FilterService;
+import com.adserver.utils.AdServerConstants;
 import com.google.common.io.Files;
 
 /**
@@ -25,12 +26,12 @@ import com.google.common.io.Files;
 @Controller
 public class AdServiceController {
 
-    private AdDbService adDbService;
-    private FilterService filterService;
-    private BestAdsProvider bestAdsProvider;
+    private final AdDbService adDbService;
+    private final FilterService filterService;
+    private final BestAdsProvider bestAdsProvider;
 
     @Autowired
-    public AdServiceController(AdDbService adDbService, FilterService filterService, BestAdsProvider bestAdsProvider) {
+    public AdServiceController(final AdDbService adDbService, final FilterService filterService, final BestAdsProvider bestAdsProvider) {
         this.adDbService = adDbService;
         this.filterService = filterService;
         this.bestAdsProvider = bestAdsProvider;
@@ -47,19 +48,16 @@ public class AdServiceController {
      * @throws NoRecordFoundException
      * @throws IOException
      */
-    @RequestMapping(value = "/getAd/{adSpace}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public @ResponseBody AdMedia getAdMediaForClient(@PathVariable String adSpace, @RequestHeader(value = "referer", required = false, defaultValue = "1") final Integer referer, @RequestHeader(value = "lastViewed", required = false, defaultValue = "1") final String visitedAds,
-                    HttpServletResponse httpServletResponse) throws NoRecordFoundException, IOException {
+    @RequestMapping(value = AdServerConstants.AD_SERVICE_CONTROLLER_PATH, method = RequestMethod.GET, headers = AdServerConstants.AD_SERVICE_ENCODE_FORMAT)
+    public @ResponseBody AdMedia getAdMediaForClient(@PathVariable final String adSpace, @RequestHeader(value = "referer", required = false, defaultValue = AdServerConstants.ONE) final Integer referer, @RequestHeader(value = AdServerConstants.AD_SERVICE_USER_VISIT_HISTORY_HEADER, required = false,
+                    defaultValue = AdServerConstants.ONE) final String visitedAds, final HttpServletResponse httpServletResponse) throws NoRecordFoundException, IOException {
         final List<AdDBResponse> response = adDbService.fetchAllAds(adSpace);
-        System.out.println("Response is " + response);
-        final List<AdDBResponse> filteredResponse = filterService.meetCriteria(response, referer);
-        System.out.println("filter: " + filteredResponse);
+        final List<AdDBResponse> filteredResponse = filterService.filterAds(response, referer);
         if (filteredResponse.size() == 0) {
             throw new NoRecordFoundException("No record found post applying filter for ad space " + adSpace);
         }
         final AdDBResponse responseToReturn = bestAdsProvider.getBestAdForClient(filteredResponse, visitedAds);
-        System.out.println("Best ad " + responseToReturn);
-        httpServletResponse.setHeader("lastViewed", visitedAds + "," + responseToReturn.getCategoryId());
+        httpServletResponse.setHeader(AdServerConstants.AD_SERVICE_USER_VISIT_HISTORY_HEADER, visitedAds + AdServerConstants.COMMA + responseToReturn.getCategoryId());
         return new AdMedia(responseToReturn.getTitle(), responseToReturn.getUrl(), Files.toByteArray(new File(responseToReturn.getLocation())));
     }
 }

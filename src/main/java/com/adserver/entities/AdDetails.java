@@ -34,7 +34,7 @@ public class AdDetails {
 
     public AdDetails() {}
 
-    public AdDetails(int adId, String targetUrl, String location, String title) {
+    public AdDetails(final int adId, final String targetUrl, final String location, final String title) {
         super();
         this.adId = adId;
         this.targetUrl = targetUrl;
@@ -46,7 +46,7 @@ public class AdDetails {
         return adId;
     }
 
-    public void setAdId(int adId) {
+    public void setAdId(final int adId) {
         this.adId = adId;
     }
 
@@ -54,7 +54,7 @@ public class AdDetails {
         return targetUrl;
     }
 
-    public void setTargetUrl(String targetUrl) {
+    public void setTargetUrl(final String targetUrl) {
         this.targetUrl = targetUrl;
     }
 
@@ -62,7 +62,7 @@ public class AdDetails {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(final String location) {
         this.location = location;
     }
 
@@ -70,7 +70,7 @@ public class AdDetails {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -78,7 +78,7 @@ public class AdDetails {
         return adCustomer;
     }
 
-    public void setAdCustomer(AdCustomer adCustomer) {
+    public void setAdCustomer(final AdCustomer adCustomer) {
         this.adCustomer = adCustomer;
     }
 
@@ -86,7 +86,7 @@ public class AdDetails {
         return adCampaign;
     }
 
-    public void setAdCampaign(AdCampaign adCampaign) {
+    public void setAdCampaign(final AdCampaign adCampaign) {
         this.adCampaign = adCampaign;
     }
 
@@ -94,7 +94,7 @@ public class AdDetails {
         return adSpace;
     }
 
-    public void setAdSpace(AdSpaceDetails adSpace) {
+    public void setAdSpace(final AdSpaceDetails adSpace) {
         this.adSpace = adSpace;
     }
 

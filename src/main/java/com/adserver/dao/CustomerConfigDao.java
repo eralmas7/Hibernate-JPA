@@ -15,7 +15,7 @@ public interface CustomerConfigDao {
      * @return
      * @throws RowNotFoundException
      */
-    public AdCustomer updateCustomer(AdCustomer adCustomer) throws RowNotFoundException;
+    public AdCustomer updateCustomer(final AdCustomer adCustomer) throws RowNotFoundException;
 
     /**
      * Returns the customer configuration given the customer id.
@@ -24,5 +24,5 @@ public interface CustomerConfigDao {
      * @return
      * @throws RowNotFoundException
      */
-    public AdCustomer getCustomer(int customerId) throws RowNotFoundException;
+    public AdCustomer getCustomer(final int customerId) throws RowNotFoundException;
 }

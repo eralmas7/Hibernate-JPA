@@ -16,5 +16,12 @@ public interface FilterCriteria {
      * @param adDbResponses
      * @return
      */
-    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses, int referer);
+    public List<AdDBResponse> meetCriteria(final List<AdDBResponse> adDbResponses, final int referer);
+
+    /**
+     * Add a filter in a chain to filter ads.
+     * 
+     * @param filterCriteria
+     */
+    public void addNextFilter(final FilterCriteria filterCriteria);
 }

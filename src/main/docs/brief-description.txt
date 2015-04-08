@@ -1,0 +1,50 @@
+User Stories
+- The customer wants to serve ads. The ad server should deliver the advertising media as JSON
+and/or XML. 
+
+I have used JSON for client which exposes rest for clients. 
+Test Cover -  AdServiceClientTest (Integration Test), AdServiceControllerTest (Unit Test)
+
+- An advertising media ("ad") is composed of a title, image, and a target URL for clicks.
+Test Cover -  AdServiceClientTest (Integration Test), AdServiceControllerTest (Unit Test)
+
+- The customer wants to be able to define advertising spaces for placement of ads on a website 
+      Advertising spaces are identified by a unique id which is sent in the ad request
+      Once an advertising space for a website is defined, only advertising media with matching dimensions may be served
+      Example: if an advertising space has a dimension of 100x100, only advertising media with 100x100 may be served
+      The ads must not be static. They should be selected randomly from the pool of available advertising media
+	  
+Test Cover -  AdServiceClientTest (Integration Test), AdServiceControllerTest (Unit Test)	  
+To support multiple images, images can be stored on local filer while link, target url and details about the ad, ad space are stored in database.
+	  
+- Advertising media should be grouped by advertising campaigns so it is possible to activate/deactivate multiple ads at once.
+      Campaigns must have an active/inactive flag
+      Campaigns may have periods of validity, time spans in which the contained advertising media may be served
+      Campaigns have a limit how often the contained ads may be served. Once the limit is reached, no ads from the campaign are to be served.
+      It should be accessible how often ads from the campaign have been served
+
+	  Test Cover - CampaignDaoTest
+	  
+- It should be possible to define optional targeting filters for a campaign in order to limit the dispatchment to target audience
+  It should be possible to filter based on the day of week and/or the hour of the day (timetargeting)
+  It should be possible to filter based on a HTTP cookievalue(cookietargeting)
+  It should be possible to filter based on the HTTP referrer should only be served if all filters match
+  
+  Test Cover - FilterServiceTest
+  
+-  The configuration should be per customer.
+   Configuration must be exposed via SOAP API
+   
+   Test Cover - ConfigServiceControllerTest
+   
+- Access must be password protected.
+    Have used basic authentication mechanism and is defined in web.xml. Have made certain assumptions here. Please refer to assumption text.
+
+- Bonus:
+   It should be possible to assign categories to advertising spaces and filter campaigns to only deliver on spaces belonging to categories specified in the category filter.
+   The categories should be inventoried, so only assignment of categories known to the system should be possible.
+   The categories should have a tree structure.
+   The the category filter should match also on descendants of the categories configured in the filter.
+   
+   I am using pre cached categories and used Graph to traverse to get descendants of a particular category. 
+   Test Cover - CategoryGraphTest

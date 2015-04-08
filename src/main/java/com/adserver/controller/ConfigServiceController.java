@@ -8,8 +8,9 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import com.adserver.entities.AdCustomer;
 import com.adserver.exception.RowNotFoundException;
 import com.adserver.service.ConfigService;
+import com.adserver.utils.AdServerConstants;
 
-@WebService(serviceName = "configService")
+@WebService(serviceName = AdServerConstants.AD_SERVER_CONFIG_SERVICE)
 public class ConfigServiceController extends SpringBeanAutowiringSupport {
 
     private ConfigService configService;
@@ -17,17 +18,17 @@ public class ConfigServiceController extends SpringBeanAutowiringSupport {
     public ConfigServiceController() {}
 
     @Autowired
-    public ConfigServiceController(ConfigService configService) {
+    public ConfigServiceController(final ConfigService configService) {
         this.configService = configService;
     }
 
     @WebMethod
-    public AdCustomer updateAdCustomerData(@WebParam AdCustomer adCustomer) throws RowNotFoundException {
+    public AdCustomer updateAdCustomerData(@WebParam final AdCustomer adCustomer) throws RowNotFoundException {
         return configService.updateCustomerConfig(adCustomer);
     }
 
     @WebMethod
-    public AdCustomer getCustomerData(@WebParam int customerId) throws RowNotFoundException {
+    public AdCustomer getCustomerData(@WebParam final int customerId) throws RowNotFoundException {
         return configService.getCustomerConfig(customerId);
     }
 }

@@ -11,7 +11,7 @@ public class AdDbService {
 
     private AdDao adDao;
 
-    public AdDbService(AdDao adDao) {
+    public AdDbService(final AdDao adDao) {
         this.adDao = adDao;
     }
 
@@ -21,7 +21,7 @@ public class AdDbService {
      * @param adSpace
      * @return
      */
-    public List<AdDBResponse> fetchAllAds(String adSpace) {
+    public List<AdDBResponse> fetchAllAds(final String adSpace) {
         return adDao.fetchAds(adSpace);
     }
 }

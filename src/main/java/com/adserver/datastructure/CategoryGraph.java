@@ -25,7 +25,7 @@ public class CategoryGraph {
         private boolean wasVisited;
         private String categoryName;
 
-        public Vertex(int categoryId, String categoryName) {
+        public Vertex(final int categoryId, final String categoryName) {
             this.categoryId = categoryId;
             this.categoryName = categoryName;
             this.wasVisited = false;
@@ -37,26 +37,26 @@ public class CategoryGraph {
      */
     private static class Graph {
 
-        private Vertex vertexList[];
-        private int adjMat[][];
-        private Stack<Integer> theStack;
-        private List<Integer> decendants = new LinkedList<Integer>();
+        private final Vertex vertexList[];
+        private final int adjMat[][];
+        private final Stack<Integer> theStack;
+        private final List<Integer> decendants = new LinkedList<Integer>();
 
-        public Graph(int maxVertices) {
+        public Graph(final int maxVertices) {
             vertexList = new Vertex[maxVertices];
             adjMat = new int[maxVertices][maxVertices];
             theStack = new Stack<Integer>();
         }
 
-        private void addVertex(int categoryId, String name) {
+        private void addVertex(final int categoryId, final String name) {
             vertexList[categoryId] = new Vertex(categoryId, name);
         }
 
-        private void addEdge(int start, int end) {
+        private void addEdge(final int start, final int end) {
             adjMat[end][start] = 1;
         }
 
-        public void dfs(int start) {
+        public void dfs(final int start) {
             if (start <= 0 || start >= vertexList.length) {
                 return;
             }
@@ -83,7 +83,7 @@ public class CategoryGraph {
             decendants.clear();
         }
 
-        private int getAdjUnvisitedVertex(int v) {
+        private int getAdjUnvisitedVertex(final int v) {
             for (int j = 1; j < vertexList.length; j++)
                 if (adjMat[v][j] == 1 && vertexList[j].wasVisited == false)
                     return j;
@@ -106,14 +106,15 @@ public class CategoryGraph {
      * 
      * @param adCategories
      */
-    public void initGraph(List<AdCategory> adCategories) {
+    public void initGraph(final List<AdCategory> adCategories) {
         final Set<AdCategory> set = new HashSet<AdCategory>();
         graph = new Graph(adCategories.size() + 1);
-        int currentCategory, parentCategory;
+        int currentCategory;
+        Integer parentCategory;
         for (AdCategory adCategory : adCategories) {
             currentCategory = adCategory.getCategoryId();
             parentCategory = adCategory.getParentCategoryId();
-            graph.addEdge(currentCategory, parentCategory);
+            graph.addEdge(currentCategory, parentCategory == null ? 0 : parentCategory);
             set.add(adCategory);
         }
         for (AdCategory adCategory : set) {
@@ -127,7 +128,7 @@ public class CategoryGraph {
      * @param node
      * @return
      */
-    public List<AdCategory> getDescendantCategories(int node) {
+    public List<AdCategory> getDescendantCategories(final int node) {
         graph.dfs(node);
         final List<AdCategory> categories = graph.getfinalCategories();
         graph.clearVisitedFlag();

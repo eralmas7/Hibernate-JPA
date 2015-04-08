@@ -15,11 +15,11 @@ public class AdCategory {
     @Column(name = "category_name")
     private String categoryName;
     @Column(name = "category_parent_id")
-    private int parentCategoryId;
+    private Integer parentCategoryId;
 
     public AdCategory() {}
 
-    public AdCategory(int categoryId, String categoryName, int parentCategoryId) {
+    public AdCategory(final int categoryId, final String categoryName, final Integer parentCategoryId) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.parentCategoryId = parentCategoryId;
@@ -29,7 +29,7 @@ public class AdCategory {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(final int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -37,15 +37,15 @@ public class AdCategory {
         return categoryName;
     }
 
-    public void setCategoryName(String categoryName) {
+    public void setCategoryName(final String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public int getParentCategoryId() {
+    public Integer getParentCategoryId() {
         return parentCategoryId;
     }
 
-    public void setParentCategoryId(int parentCategoryId) {
+    public void setParentCategoryId(final Integer parentCategoryId) {
         this.parentCategoryId = parentCategoryId;
     }
 

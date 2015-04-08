@@ -14,5 +14,5 @@ public interface AdDao {
      * @param adSpace
      * @return
      */
-    public List<AdDBResponse> fetchAds(String adSpace);
+    public List<AdDBResponse> fetchAds(final String adSpace);
 }

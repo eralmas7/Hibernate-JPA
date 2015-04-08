@@ -32,7 +32,7 @@ public class AdCampaign {
 
     public AdCampaign() {}
 
-    public AdCampaign(int campaignId, byte isCampaignActive, Date campaignStartDate, Date campaignEndDate, int campaignMaxHitLimit) {
+    public AdCampaign(final int campaignId, final byte isCampaignActive, final Date campaignStartDate, final Date campaignEndDate, final int campaignMaxHitLimit) {
         this.campaignId = campaignId;
         this.isCampaignActive = isCampaignActive;
         this.campaignStartDate = campaignStartDate;
@@ -44,7 +44,7 @@ public class AdCampaign {
         return campaignId;
     }
 
-    public void setCampaignId(int campaignId) {
+    public void setCampaignId(final int campaignId) {
         this.campaignId = campaignId;
     }
 
@@ -52,7 +52,7 @@ public class AdCampaign {
         return isCampaignActive;
     }
 
-    public void setIsCampaignActive(byte isCampaignActive) {
+    public void setIsCampaignActive(final byte isCampaignActive) {
         this.isCampaignActive = isCampaignActive;
     }
 
@@ -60,7 +60,7 @@ public class AdCampaign {
         return campaignStartDate;
     }
 
-    public void setCampaignStartDate(Date campaignStartDate) {
+    public void setCampaignStartDate(final Date campaignStartDate) {
         this.campaignStartDate = campaignStartDate;
     }
 
@@ -68,7 +68,7 @@ public class AdCampaign {
         return campaignEndDate;
     }
 
-    public void setCampaignEndDate(Date campaignEndDate) {
+    public void setCampaignEndDate(final Date campaignEndDate) {
         this.campaignEndDate = campaignEndDate;
     }
 
@@ -76,7 +76,7 @@ public class AdCampaign {
         return campaignMaxHitLimit;
     }
 
-    public void setCampaignMaxHitLimit(int campaignMaxHitLimit) {
+    public void setCampaignMaxHitLimit(final int campaignMaxHitLimit) {
         this.campaignMaxHitLimit = campaignMaxHitLimit;
     }
 
@@ -84,7 +84,7 @@ public class AdCampaign {
         return adDetails;
     }
 
-    public void setAdDetails(List<AdDetails> adDetails) {
+    public void setAdDetails(final List<AdDetails> adDetails) {
         this.adDetails = adDetails;
     }
 

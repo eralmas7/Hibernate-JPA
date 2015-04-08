@@ -10,7 +10,7 @@ public class AdDBResponse {
 
     public AdDBResponse() {}
 
-    public AdDBResponse(String location, String url, int categoryId, int campaignId, String title) {
+    public AdDBResponse(final String location, final String url, final int categoryId, final int campaignId, final String title) {
         super();
         this.location = location;
         this.url = url;
@@ -19,7 +19,7 @@ public class AdDBResponse {
         this.title = title;
     }
 
-    public AdDBResponse(String location, String url, String title) {
+    public AdDBResponse(final String location, final String url, final String title) {
         super();
         this.location = location;
         this.url = url;
@@ -30,7 +30,7 @@ public class AdDBResponse {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(final String location) {
         this.location = location;
     }
 
@@ -38,7 +38,7 @@ public class AdDBResponse {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -46,7 +46,7 @@ public class AdDBResponse {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(final int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -54,7 +54,7 @@ public class AdDBResponse {
         return campaignId;
     }
 
-    public void setCampaignId(int campaignId) {
+    public void setCampaignId(final int campaignId) {
         this.campaignId = campaignId;
     }
 
@@ -62,7 +62,7 @@ public class AdDBResponse {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 

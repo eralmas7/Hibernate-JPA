@@ -7,7 +7,7 @@ public class NoRecordFoundException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    public NoRecordFoundException(String message) {
+    public NoRecordFoundException(final String message) {
         super(message);
     }
 }

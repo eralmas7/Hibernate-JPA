@@ -1,31 +1,20 @@
 package com.adserver.dao;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.adserver.datatype.AdDBResponse;
 
-// @RunWith...
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:adserver_hibernate.xml"})
 public class AdRequestDaoTest {
 
-    private static ApplicationContext context;
+    @Autowired
     private AdDao adDao;
-
-    @BeforeClass
-    public static void initContext() throws IOException {
-        context = new FileSystemXmlApplicationContext(new File("src/main/webapp/WEB-INF/adserver_hibernate.xml").getCanonicalPath());
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        adDao = context.getBean("adDao", AdDao.class);
-    }
 
     @Test
     public void testDaoForExistingRecord() {

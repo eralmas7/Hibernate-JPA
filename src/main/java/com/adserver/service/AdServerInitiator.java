@@ -19,23 +19,25 @@ public class AdServerInitiator {
     private TupleDao campaignDao;
     private TupleDao customerDao;
 
-    public AdServerInitiator(CategoriesDao categoriesDao, CategoryGraph categoryGraph) {
+    public AdServerInitiator(final CategoriesDao categoriesDao, final CategoryGraph categoryGraph, final TupleDao campaignDao, final TupleDao customerDao) {
         this.categoriesDao = categoriesDao;
         this.categoryGraph = categoryGraph;
+        this.campaignDao = campaignDao;
+        this.customerDao = customerDao;
     }
 
-    private Map<Integer, Integer> getCampaignMap(List<Tuple> tuples) {
+    private Map<Integer, Integer> getCampaignMap(final List<Tuple> tuples) {
         final Map<Integer, Integer> campaignLimitMap = new HashMap<Integer, Integer>();
         for (Tuple tuple : tuples) {
-            campaignLimitMap.put(Integer.valueOf((String) tuple.get(0)), Integer.valueOf((String) tuple.get(1)));
+            campaignLimitMap.put((Integer) tuple.get(0), (Integer) tuple.get(1));
         }
         return campaignLimitMap;
     }
 
-    private Map<Integer, String> getCustomerTypeMap(List<Tuple> tuples) {
-        final Map<Integer, String> customerTypeMap = new HashMap<Integer, String>();
+    private Map<Integer, Integer> getCustomerTypeMap(final List<Tuple> tuples) {
+        final Map<Integer, Integer> customerTypeMap = new HashMap<Integer, Integer>();
         for (Tuple tuple : tuples) {
-            customerTypeMap.put(Integer.valueOf((String) tuple.get(0)), (String) tuple.get(1));
+            customerTypeMap.put((Integer) tuple.get(0), (Integer) tuple.get(1));
         }
         return customerTypeMap;
     }

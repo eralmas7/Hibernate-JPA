@@ -25,7 +25,7 @@ public class AdSpaceDetails {
 
     public AdSpaceDetails() {}
 
-    public AdSpaceDetails(int adSpaceId, int height, int width) {
+    public AdSpaceDetails(final int adSpaceId, final int height, final int width) {
         super();
         this.adSpaceId = adSpaceId;
         this.height = height;
@@ -36,7 +36,7 @@ public class AdSpaceDetails {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
@@ -44,7 +44,7 @@ public class AdSpaceDetails {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(final int width) {
         this.width = width;
     }
 
@@ -52,7 +52,7 @@ public class AdSpaceDetails {
         return adSpaceId;
     }
 
-    public void setAdSpaceId(int adSpaceId) {
+    public void setAdSpaceId(final int adSpaceId) {
         this.adSpaceId = adSpaceId;
     }
 
@@ -60,7 +60,7 @@ public class AdSpaceDetails {
         return adDetails;
     }
 
-    public void setAdDetails(AdDetails adDetails) {
+    public void setAdDetails(final AdDetails adDetails) {
         this.adDetails = adDetails;
     }
 

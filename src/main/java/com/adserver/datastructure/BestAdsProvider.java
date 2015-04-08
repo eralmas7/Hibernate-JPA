@@ -14,8 +14,9 @@ import com.adserver.entities.AdCategory;
 public class BestAdsProvider {
 
     private CategoryGraph categoryGraph;
+    public static final String VISITED_AD_SEPERATOR = "\\s*,\\s*";
 
-    public BestAdsProvider(CategoryGraph categoryGraph) {
+    public BestAdsProvider(final CategoryGraph categoryGraph) {
         this.categoryGraph = categoryGraph;
     }
 
@@ -27,7 +28,7 @@ public class BestAdsProvider {
      * @param visitedAds
      * @return
      */
-    public AdDBResponse getBestAdForClient(List<AdDBResponse> inputAds, String visitedAds) {
+    public AdDBResponse getBestAdForClient(final List<AdDBResponse> inputAds, final String visitedAds) {
         final TreeMap<String, Integer> categoryVisitedCount = countUserLikes(visitedAds);
         if (categoryVisitedCount.isEmpty()) {
             return inputAds.get(0);
@@ -43,7 +44,7 @@ public class BestAdsProvider {
         return inputAds.get(0);// default none seems to be visited by user
     }
 
-    private boolean doesListContainsCategory(List<AdCategory> adCategories, int mostUserLikes) {
+    private boolean doesListContainsCategory(final List<AdCategory> adCategories, final int mostUserLikes) {
         for (AdCategory adCategory : adCategories) {
             if (adCategory.getCategoryId() == mostUserLikes) {
                 return true;
@@ -52,14 +53,14 @@ public class BestAdsProvider {
         return false;
     }
 
-    private TreeMap<String, Integer> countUserLikes(String visitedAds) {
+    private TreeMap<String, Integer> countUserLikes(final String visitedAds) {
         final Map<String, Integer> originalMap = new HashMap<String, Integer>();
-        ValueComparator valueComparator = new ValueComparator(originalMap);
+        final ValueComparator valueComparator = new ValueComparator(originalMap);
         final TreeMap<String, Integer> sortedMapByCategoryVisitedCount = new TreeMap<String, Integer>(valueComparator);
         if (visitedAds.trim().equals("")) {
             return sortedMapByCategoryVisitedCount;
         }
-        String[] adsVisitedByClient = visitedAds.split("\\s*,\\s*");
+        final String[] adsVisitedByClient = visitedAds.split(VISITED_AD_SEPERATOR);
         Integer value;
         for (String adVisitedByClient : adsVisitedByClient) {
             value = originalMap.get(adVisitedByClient);

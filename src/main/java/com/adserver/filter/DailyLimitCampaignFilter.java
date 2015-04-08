@@ -8,11 +8,11 @@ import com.adserver.service.CacheService;
 /**
  * Filter out any ads that has potentially exceeded the daily limit.
  */
-public class DailyLimitCampaignFilter implements FilterCriteria {
+public class DailyLimitCampaignFilter extends AbstractFilterCriteria {
 
     @Override
-    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses, int referer) {
-        List<AdDBResponse> adResponses = new LinkedList<AdDBResponse>();
+    public List<AdDBResponse> meetCriteria(final List<AdDBResponse> adDbResponses, final int referer) {
+        final List<AdDBResponse> adResponses = new LinkedList<AdDBResponse>();
         Integer currentHitCount;
         Integer maxHitCount;
         for (AdDBResponse adResponse : adDbResponses) {
@@ -22,6 +22,6 @@ public class DailyLimitCampaignFilter implements FilterCriteria {
                 adResponses.add(adResponse);
             }
         }
-        return adResponses;
+        return super.getNextFilterCriteria().meetCriteria(adDbResponses, referer);
     }
 }

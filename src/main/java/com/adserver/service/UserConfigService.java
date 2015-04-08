@@ -13,12 +13,12 @@ public class UserConfigService implements ConfigService {
     private CustomerConfigDao customerConfigDao;
 
     @Override
-    public AdCustomer updateCustomerConfig(AdCustomer adCustomer) throws RowNotFoundException {
+    public AdCustomer updateCustomerConfig(final AdCustomer adCustomer) throws RowNotFoundException {
         return customerConfigDao.updateCustomer(adCustomer);
     }
 
     @Override
-    public AdCustomer getCustomerConfig(int customerId) throws RowNotFoundException {
+    public AdCustomer getCustomerConfig(final int customerId) throws RowNotFoundException {
         return customerConfigDao.getCustomer(customerId);
     }
 }

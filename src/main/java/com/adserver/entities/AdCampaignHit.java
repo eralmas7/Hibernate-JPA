@@ -20,7 +20,7 @@ public class AdCampaignHit {
 
     public AdCampaignHit() {}
 
-    public AdCampaignHit(int campaignId, Date dateHit, int campaignHitCount) {
+    public AdCampaignHit(final int campaignId, final Date dateHit, final int campaignHitCount) {
         this.campaignId = campaignId;
         this.dateHit = dateHit;
         this.campaignHitCount = campaignHitCount;
@@ -30,7 +30,7 @@ public class AdCampaignHit {
         return campaignId;
     }
 
-    public void setCampaignId(int campaignId) {
+    public void setCampaignId(final int campaignId) {
         this.campaignId = campaignId;
     }
 
@@ -38,7 +38,7 @@ public class AdCampaignHit {
         return dateHit;
     }
 
-    public void setDateHit(Date dateHit) {
+    public void setDateHit(final Date dateHit) {
         this.dateHit = dateHit;
     }
 
@@ -46,7 +46,7 @@ public class AdCampaignHit {
         return campaignHitCount;
     }
 
-    public void setCampaignHitCount(int campaignHitCount) {
+    public void setCampaignHitCount(final int campaignHitCount) {
         this.campaignHitCount = campaignHitCount;
     }
 

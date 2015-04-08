@@ -9,7 +9,9 @@ public class AdMedia {
     private String url;
     private byte[] image;
 
-    public AdMedia(String title, String url, byte[] image) {
+    public AdMedia() {}
+
+    public AdMedia(final String title, final String url, final byte[] image) {
         this.title = title;
         this.url = url;
         this.image = image;
@@ -19,7 +21,7 @@ public class AdMedia {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -27,7 +29,7 @@ public class AdMedia {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -35,7 +37,7 @@ public class AdMedia {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(final byte[] image) {
         this.image = image;
     }
 }

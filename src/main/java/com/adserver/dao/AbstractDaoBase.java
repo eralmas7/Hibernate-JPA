@@ -25,7 +25,7 @@ public class AbstractDaoBase {
      * 
      * @param entityManager
      */
-    public void setEntityManager(EntityManager entityManager) {
+    public void setEntityManager(final EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 }

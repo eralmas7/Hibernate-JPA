@@ -15,7 +15,7 @@ public interface ConfigService {
      * @return
      * @throws RowNotFoundException
      */
-    public AdCustomer updateCustomerConfig(AdCustomer adCustomer) throws RowNotFoundException;
+    public AdCustomer updateCustomerConfig(final AdCustomer adCustomer) throws RowNotFoundException;
 
     /**
      * fetches customer configuration based on id.
@@ -24,5 +24,5 @@ public interface ConfigService {
      * @return
      * @throws RowNotFoundException
      */
-    public AdCustomer getCustomerConfig(int customerId) throws RowNotFoundException;
+    public AdCustomer getCustomerConfig(final int customerId) throws RowNotFoundException;
 }

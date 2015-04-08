@@ -39,12 +39,18 @@
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/adserver" />
 		<property name="username" value="almass" />
-		<property name="password" value="5stars" />
+		<property name="password" value="5stars" /><!-- further we can add auto reconnect validation query, timeouts -->
 	</bean>
  
 	<bean id="adDao" class="com.adserver.dao.AdRequestDaoImpl" />
 	
-	<bean id="customerDao" class="com.adserver.dao.CustomerConfigDaoImpl" />
+	<bean id="customerConfigDao" class="com.adserver.dao.CustomerConfigDaoImpl" />
+	
+	<bean id="categoriesDao" class="com.adserver.dao.CategoriesDaoImpl" />
+	
+	<bean id="campaignDao" class="com.adserver.dao.CampaignDaoImpl" />
+	
+	<bean id="customerDao" class="com.adserver.dao.CustomerDaoImpl" />
 	
 	<bean id="adDbService" class="com.adserver.service.AdDbService">
 		<constructor-arg ref="adDao"/>
@@ -64,9 +70,19 @@
 	
 	<bean id="refererFilter" class="com.adserver.filter.RefererFilter" />
 	
+	<bean id="nullFilter" class="com.adserver.filter.NullFilter" />
+	
+	<bean id="adServerInitiator" class="com.adserver.service.AdServerInitiator" init-method="initiateServer">
+		<constructor-arg index="0" ref="categoriesDao"/>
+		<constructor-arg index="1" ref="categoryGraph"/>
+		<constructor-arg index="2" ref="campaignDao"/>
+		<constructor-arg index="3" ref="customerDao"/>
+	</bean>
+	
 	<bean id="filterService" class="com.adserver.service.FilterService">
 		<constructor-arg index="0" ref="categoryFilter"/>
 		<constructor-arg index="1" ref="dailyLimitCampaignFilter"/>
 		<constructor-arg index="2" ref="refererFilter"/>
+		<constructor-arg index="3" ref="nullFilter"/>
 	</bean>
 </beans>
