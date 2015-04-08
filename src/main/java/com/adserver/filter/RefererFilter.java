@@ -4,26 +4,19 @@ import java.util.LinkedList;
 import java.util.List;
 import com.adserver.datatype.AdDBResponse;
 
+/**
+ * Based on referral criteria, this class with filter the records.
+ */
 public class RefererFilter implements FilterCriteria {
 
-    private Integer referer;
-
     @Override
-    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses) {
+    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses, int referer) {
         List<AdDBResponse> adResponses = new LinkedList<AdDBResponse>();
         for (AdDBResponse adResponse : adResponses) {
-            if (adResponse.getCategoryId() == this.referer) {
+            if (adResponse.getCategoryId() == referer) {
                 adResponses.add(adResponse);
             }
         }
         return adResponses;
-    }
-
-    public Integer getReferer() {
-        return referer;
-    }
-
-    public void setReferer(Integer referer) {
-        this.referer = referer;
     }
 }

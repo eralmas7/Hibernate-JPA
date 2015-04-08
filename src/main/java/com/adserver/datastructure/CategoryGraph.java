@@ -8,11 +8,18 @@ import java.util.Set;
 import java.util.Stack;
 import com.adserver.entities.AdCategory;
 
+/**
+ * Graph to maintain category details. It would be cumbersome to run recursive queries on backend
+ * (lot of resource usage could be avoided)
+ */
 public class CategoryGraph {
 
     private static Graph graph;
 
-    static class Vertex {
+    /*
+     * vertex of a graph
+     */
+    private static class Vertex {
 
         private int categoryId;
         private boolean wasVisited;
@@ -25,7 +32,10 @@ public class CategoryGraph {
         }
     }
 
-    static class Graph {
+    /*
+     * Graph which will hold category and its relation with other categories.
+     */
+    private static class Graph {
 
         private Vertex vertexList[];
         private int adjMat[][];
@@ -38,11 +48,11 @@ public class CategoryGraph {
             theStack = new Stack<Integer>();
         }
 
-        public void addVertex(int categoryId, String name) {
+        private void addVertex(int categoryId, String name) {
             vertexList[categoryId] = new Vertex(categoryId, name);
         }
 
-        public void addEdge(int start, int end) {
+        private void addEdge(int start, int end) {
             adjMat[end][start] = 1;
         }
 
@@ -66,14 +76,14 @@ public class CategoryGraph {
             }
         }
 
-        public void clearVisitedFlag() {
+        private void clearVisitedFlag() {
             for (int j = 1; j < vertexList.length; j++) {
                 vertexList[j].wasVisited = false;
             }
             decendants.clear();
         }
 
-        public int getAdjUnvisitedVertex(int v) {
+        private int getAdjUnvisitedVertex(int v) {
             for (int j = 1; j < vertexList.length; j++)
                 if (adjMat[v][j] == 1 && vertexList[j].wasVisited == false)
                     return j;
@@ -91,6 +101,11 @@ public class CategoryGraph {
         }
     }
 
+    /**
+     * Build the graph for the categories.
+     * 
+     * @param adCategories
+     */
     public void initGraph(List<AdCategory> adCategories) {
         final Set<AdCategory> set = new HashSet<AdCategory>();
         graph = new Graph(adCategories.size() + 1);
@@ -106,7 +121,13 @@ public class CategoryGraph {
         }
     }
 
-    public List<AdCategory> getDecendantCategories(int node) {
+    /**
+     * Get all the descendant categories for the parent node given as input parameter.
+     * 
+     * @param node
+     * @return
+     */
+    public List<AdCategory> getDescendantCategories(int node) {
         graph.dfs(node);
         final List<AdCategory> categories = graph.getfinalCategories();
         graph.clearVisitedFlag();

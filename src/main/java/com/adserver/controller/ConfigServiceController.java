@@ -12,8 +12,14 @@ import com.adserver.service.ConfigService;
 @WebService(serviceName = "configService")
 public class ConfigServiceController extends SpringBeanAutowiringSupport {
 
-    @Autowired
     private ConfigService configService;
+
+    public ConfigServiceController() {}
+
+    @Autowired
+    public ConfigServiceController(ConfigService configService) {
+        this.configService = configService;
+    }
 
     @WebMethod
     public AdCustomer updateAdCustomerData(@WebParam AdCustomer adCustomer) throws RowNotFoundException {

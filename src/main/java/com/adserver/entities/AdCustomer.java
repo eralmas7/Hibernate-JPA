@@ -29,14 +29,14 @@ public class AdCustomer {
     @Column(name = "cust_end_date")
     private Date customerEndDate;
     @Column(name = "cust_type")
-    private String customerType;
+    private int customerType;
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ad_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private List<AdDetails> adDetailsList = new ArrayList<AdDetails>();
 
     public AdCustomer() {}
 
-    public AdCustomer(int customerId, String customerDns, String customerName, byte isCustomerActive, Date customerStartDate, Date customerEndDate, String customerType) {
+    public AdCustomer(int customerId, String customerDns, String customerName, byte isCustomerActive, Date customerStartDate, Date customerEndDate, int customerType) {
         super();
         this.customerId = customerId;
         this.customerDns = customerDns;
@@ -95,11 +95,11 @@ public class AdCustomer {
         this.customerName = customerName;
     }
 
-    public String getCustomerType() {
+    public int getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(String customerType) {
+    public void setCustomerType(int customerType) {
         this.customerType = customerType;
     }
 

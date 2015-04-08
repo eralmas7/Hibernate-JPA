@@ -2,64 +2,24 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	 xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.1.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-        http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+	<import resource="adserver_hibernate.xml" />
  
-	<context:component-scan base-package="com.adserver" />
-	<tx:annotation-driven transaction-manager="transactionManager" />
 	<mvc:annotation-driven />
-	<context:annotation-config/>
-	
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="persistenceXmlLocation" value="classpath:adserver_persistence.xml" />
-		<property name="persistenceUnitName" value="adServerPersistenceUnit" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
-		<property name="jpaDialect" ref="jpaDialect" />
-	</bean>
- 
-	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="database" value="MYSQL" />
-		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
-	</bean>
- 
-	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
-	
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaDialect" ref="jpaDialect" />
-	</bean>
- 
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/adserver" />
-		<property name="username" value="almass" />
-		<property name="password" value="5stars" />
-	</bean>
- 
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<bean id="adDao" class="com.adserver.dao.AdRequestDaoImpl" />
-	
-	<bean id="customerDao" class="com.adserver.dao.CustomerConfigDaoImpl" />
-	
-	<bean id="adDbService" class="com.adserver.service.AdDbService">
-		<constructor-arg ref="adDao"/>
-   </bean>
- 
  	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
  
  	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -70,18 +30,4 @@
 		</property>
 	</bean>
 	
-	<bean id="categoryGraph" class="com.adserver.datastructure.CategoryGraph" />
-	<bean id="adProvider" class="com.adserver.datastructure.BestAdsProvider">
-		<constructor-arg index="0" ref="categoryGraph"/>
-	</bean>
-	<bean id="categoryFilter" class="com.adserver.filter.CategoryFilter">
-		<constructor-arg index="0" ref="categoryGraph"/>
-	</bean>
-	<bean id="dailyLimitCampaignFilter" class="com.adserver.filter.DailyLimitCampaignFilter" />
-	<bean id="refererFilter" class="com.adserver.filter.RefererFilter" />
-	<bean id="filterService" class="com.adserver.service.FilterService">
-		<constructor-arg index="0" ref="categoryFilter"/>
-		<constructor-arg index="1" ref="dailyLimitCampaignFilter"/>
-		<constructor-arg index="2" ref="refererFilter"/>
-	</bean>
 </beans>

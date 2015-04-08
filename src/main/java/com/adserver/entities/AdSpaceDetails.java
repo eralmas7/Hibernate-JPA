@@ -2,7 +2,10 @@ package com.adserver.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,9 @@ public class AdSpaceDetails {
     private int height;
     @Column(name = "ad_width")
     private int width;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ad_space_id", nullable = false)
+    private AdDetails adDetails = new AdDetails();
 
     public AdSpaceDetails() {}
 
@@ -24,14 +30,6 @@ public class AdSpaceDetails {
         this.adSpaceId = adSpaceId;
         this.height = height;
         this.width = width;
-    }
-
-    public int getAdSpaceId() {
-        return adSpaceId;
-    }
-
-    public void setAdSpaceId(int adSpaceId) {
-        this.adSpaceId = adSpaceId;
     }
 
     public int getHeight() {
@@ -48,6 +46,22 @@ public class AdSpaceDetails {
 
     public void setWidth(int width) {
         this.width = width;
+    }
+
+    public int getAdSpaceId() {
+        return adSpaceId;
+    }
+
+    public void setAdSpaceId(int adSpaceId) {
+        this.adSpaceId = adSpaceId;
+    }
+
+    public AdDetails getAdDetails() {
+        return adDetails;
+    }
+
+    public void setAdDetails(AdDetails adDetails) {
+        this.adDetails = adDetails;
     }
 
     @Override

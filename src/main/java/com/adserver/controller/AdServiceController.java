@@ -19,28 +19,46 @@ import com.adserver.service.AdDbService;
 import com.adserver.service.FilterService;
 import com.google.common.io.Files;
 
+/**
+ * Controller which is meant for client that exposes rest call for them to get ad details.
+ */
 @Controller
 public class AdServiceController {
 
-    @Autowired
     private AdDbService adDbService;
-    @Autowired
     private FilterService filterService;
-    @Autowired
     private BestAdsProvider bestAdsProvider;
 
+    @Autowired
+    public AdServiceController(AdDbService adDbService, FilterService filterService, BestAdsProvider bestAdsProvider) {
+        this.adDbService = adDbService;
+        this.filterService = filterService;
+        this.bestAdsProvider = bestAdsProvider;
+    }
+
+    /**
+     * Rest call for clients which will return the AdMedia in json format.
+     * 
+     * @param adSpace
+     * @param referer
+     * @param visitedAds
+     * @param httpServletResponse
+     * @return
+     * @throws NoRecordFoundException
+     * @throws IOException
+     */
     @RequestMapping(value = "/getAd/{adSpace}", method = RequestMethod.GET, headers = "Accept=application/json")
-    public @ResponseBody AdMedia hello(@PathVariable String adSpace, @RequestHeader(value = "referer", required = false, defaultValue = "1") final Integer referer, @RequestHeader(value = "lastViewed", required = false, defaultValue = "1") final String visitedAds,
+    public @ResponseBody AdMedia getAdMediaForClient(@PathVariable String adSpace, @RequestHeader(value = "referer", required = false, defaultValue = "1") final Integer referer, @RequestHeader(value = "lastViewed", required = false, defaultValue = "1") final String visitedAds,
                     HttpServletResponse httpServletResponse) throws NoRecordFoundException, IOException {
         final List<AdDBResponse> response = adDbService.fetchAllAds(adSpace);
         System.out.println("Response is " + response);
-        filterService.getRefererCriteria().setReferer(referer);
-        final List<AdDBResponse> filteredResponse = filterService.meetCriteria(response);
-        System.out.println(response);
+        final List<AdDBResponse> filteredResponse = filterService.meetCriteria(response, referer);
+        System.out.println("filter: " + filteredResponse);
         if (filteredResponse.size() == 0) {
             throw new NoRecordFoundException("No record found post applying filter for ad space " + adSpace);
         }
         final AdDBResponse responseToReturn = bestAdsProvider.getBestAdForClient(filteredResponse, visitedAds);
+        System.out.println("Best ad " + responseToReturn);
         httpServletResponse.setHeader("lastViewed", visitedAds + "," + responseToReturn.getCategoryId());
         return new AdMedia(responseToReturn.getTitle(), responseToReturn.getUrl(), Files.toByteArray(new File(responseToReturn.getLocation())));
     }

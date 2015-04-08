@@ -16,27 +16,27 @@ import javax.persistence.Table;
 public class AdCampaign {
 
     @Id
-    @Column(name = "ad_campaign")
+    @Column(name = "campaign_id")
     private int campaignId;
     @Column(name = "camp_active")
     private byte isCampaignActive;
     @Column(name = "camp_start_date")
     private Date campaignStartDate;
     @Column(name = "camp_end_date")
-    private Date campaignEndEate;
+    private Date campaignEndDate;
     @Column(name = "camp_max_hit_limit")
     private int campaignMaxHitLimit;
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ad_id", nullable = false)
+    @JoinColumn(name = "campaign_id", nullable = false)
     private List<AdDetails> adDetails = new ArrayList<AdDetails>();
 
     public AdCampaign() {}
 
-    public AdCampaign(int campaignId, byte isCampaignActive, Date campaignStartDate, Date campaignEndEate, int campaignMaxHitLimit) {
+    public AdCampaign(int campaignId, byte isCampaignActive, Date campaignStartDate, Date campaignEndDate, int campaignMaxHitLimit) {
         this.campaignId = campaignId;
         this.isCampaignActive = isCampaignActive;
         this.campaignStartDate = campaignStartDate;
-        this.campaignEndEate = campaignEndEate;
+        this.campaignEndDate = campaignEndDate;
         this.campaignMaxHitLimit = campaignMaxHitLimit;
     }
 
@@ -64,12 +64,12 @@ public class AdCampaign {
         this.campaignStartDate = campaignStartDate;
     }
 
-    public Date getCampaignEndEate() {
-        return campaignEndEate;
+    public Date getCampaignEndDate() {
+        return campaignEndDate;
     }
 
-    public void setCampaignEndEate(Date campaignEndEate) {
-        this.campaignEndEate = campaignEndEate;
+    public void setCampaignEndDate(Date campaignEndDate) {
+        this.campaignEndDate = campaignEndDate;
     }
 
     public int getCampaignMaxHitLimit() {
@@ -90,6 +90,6 @@ public class AdCampaign {
 
     @Override
     public String toString() {
-        return "AdCampaign [campaignId=" + campaignId + ", isCampaignActive=" + isCampaignActive + ", campaignStartDate=" + campaignStartDate + ", campaignEndEate=" + campaignEndEate + ", campaignMaxHitLimit=" + campaignMaxHitLimit + "]";
+        return "AdCampaign [campaignId=" + campaignId + ", isCampaignActive=" + isCampaignActive + ", campaignStartDate=" + campaignStartDate + ", campaignEndDate=" + campaignEndDate + ", campaignMaxHitLimit=" + campaignMaxHitLimit + "]";
     }
 }

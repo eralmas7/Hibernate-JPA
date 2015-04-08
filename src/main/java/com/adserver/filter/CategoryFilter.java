@@ -6,6 +6,9 @@ import com.adserver.datastructure.CategoryGraph;
 import com.adserver.datatype.AdDBResponse;
 import com.adserver.entities.AdCategory;
 
+/**
+ * Filter based on category that user might be interested in.
+ */
 public class CategoryFilter implements FilterCriteria {
 
     private CategoryGraph categoryGraph;
@@ -15,11 +18,11 @@ public class CategoryFilter implements FilterCriteria {
     }
 
     @Override
-    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses) {
+    public List<AdDBResponse> meetCriteria(List<AdDBResponse> adDbResponses, int referer) {
         List<AdDBResponse> adResponses = new LinkedList<AdDBResponse>();
         List<AdCategory> adCategories;
         for (AdDBResponse adResponse : adResponses) {
-            adCategories = this.categoryGraph.getDecendantCategories(adResponse.getCategoryId());
+            adCategories = this.categoryGraph.getDescendantCategories(adResponse.getCategoryId());
             for (AdCategory adCategory : adCategories) {
                 if (adCategory.getCategoryId() == adResponse.getCategoryId()) {
                     adResponses.add(adResponse);

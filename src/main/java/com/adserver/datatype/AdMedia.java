@@ -1,5 +1,8 @@
 package com.adserver.datatype;
 
+/**
+ * Input for the client containing ad details which client requested.
+ */
 public class AdMedia {
 
     private String title;

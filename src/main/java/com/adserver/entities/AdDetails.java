@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,16 +22,15 @@ public class AdDetails {
     private String location;
     @Column(name = "ad_title")
     private String title;
-    @Column(name = "ad_height")
-    private int height;
-    @Column(name = "ad_width")
-    private int width;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cust_id", nullable = false, referencedColumnName = "ad_id", insertable = false, updatable = false)
+    @JoinColumn(name = "cust_id", nullable = false, referencedColumnName = "cust_id", insertable = false, updatable = false)
     private AdCustomer adCustomer = new AdCustomer();
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "campaign_id", nullable = false, referencedColumnName = "ad_id", insertable = false, updatable = false)
+    @JoinColumn(name = "campaign_id", nullable = false, referencedColumnName = "campaign_id", insertable = false, updatable = false)
     private AdCampaign adCampaign = new AdCampaign();
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ad_space_id", nullable = false, referencedColumnName = "ad_space_id", insertable = false, updatable = false)
+    private AdSpaceDetails adSpace = new AdSpaceDetails();
 
     public AdDetails() {}
 
@@ -74,22 +74,6 @@ public class AdDetails {
         this.title = title;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public AdCustomer getAdCustomer() {
         return adCustomer;
     }
@@ -104,6 +88,14 @@ public class AdDetails {
 
     public void setAdCampaign(AdCampaign adCampaign) {
         this.adCampaign = adCampaign;
+    }
+
+    public AdSpaceDetails getAdSpace() {
+        return adSpace;
+    }
+
+    public void setAdSpace(AdSpaceDetails adSpace) {
+        this.adSpace = adSpace;
     }
 
     @Override

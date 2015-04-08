@@ -9,6 +9,9 @@ import com.adserver.dao.TupleDao;
 import com.adserver.datastructure.CategoryGraph;
 import com.adserver.entities.AdCategory;
 
+/**
+ * Initiator for ad service which will warm up internal caches.
+ */
 public class AdServerInitiator {
 
     private CategoriesDao categoriesDao;
@@ -37,6 +40,9 @@ public class AdServerInitiator {
         return customerTypeMap;
     }
 
+    /**
+     * Warms up category graph, customer type cache, campaign and its limit cache.
+     */
     public void initiateServer() {
         final List<AdCategory> adCategories = categoriesDao.fetchAllCategory();
         categoryGraph.initGraph(adCategories);
